@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<title>SVG sprite example</title>
+</head>
+<body>
+	<div class="content">
+		<svg class="inline-svg-icon">
+		  <use xlink:href="#cloud"></use>
+		</svg>
+		 
+		<svg class="inline-svg-icon">
+		  <use xlink:href="#cloud-computing"></use>
+		</svg>
+	</div>
+
+	<script>
+		// Это для jquery
+		/*$(function(){
+			var svgSprite = $('<div id="svg-sprite"></div>');
+			svgSprite.appendTo( "body" );
+			svgSprite.load('svg.htm');
+		});*/
+
+		var svgSprite = document.createElement("div");
+		svgSprite.setAttribute("id", "svg-sprite");
+
+		document.body.append(svgSprite);
+
+		function load(target, url) {
+			var request = new XMLHttpRequest();
+			request.open("GET", url, true);
+			request.onreadystatechange = function () {
+				if (request.readyState != 4 || request.status != 200) return;
+				target.innerHTML = request.responseText;
+			};
+			request.send();
+		}
+
+		load(document.getElementById('svg-sprite'), 'svg.htm');
+	</script>
+</body>
+</html>
